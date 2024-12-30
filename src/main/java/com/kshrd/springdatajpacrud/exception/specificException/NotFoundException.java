@@ -1,4 +1,4 @@
-package com.kshrd.springdatajpacrud.exception;
+package com.kshrd.springdatajpacrud.exception.specificException;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

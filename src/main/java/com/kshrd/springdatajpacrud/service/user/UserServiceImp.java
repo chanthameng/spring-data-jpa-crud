@@ -1,10 +1,9 @@
 package com.kshrd.springdatajpacrud.service.user;
 
 import com.kshrd.springdatajpacrud.dto.request.UserRequest;
-import com.kshrd.springdatajpacrud.dto.response.ApiResponse;
 import com.kshrd.springdatajpacrud.entity.Role;
 import com.kshrd.springdatajpacrud.entity.User;
-import com.kshrd.springdatajpacrud.exception.NotFoundException;
+import com.kshrd.springdatajpacrud.exception.specificException.NotFoundException;
 import com.kshrd.springdatajpacrud.repository.RoleRepository;
 import com.kshrd.springdatajpacrud.repository.UserRepository;
 import org.springframework.stereotype.Service;

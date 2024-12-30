@@ -1,5 +1,6 @@
 package com.kshrd.springdatajpacrud.exception;
 
+import com.kshrd.springdatajpacrud.exception.specificException.NotFoundException;
 import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -7,10 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+
 @Hidden
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,14 +30,13 @@ public class GlobalExceptionHandler {
                 .body(problemDetail);
     }
 
-
-
     @ExceptionHandler(NotFoundException.class)
     ProblemDetail handleNotFoundException(NotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.NOT_FOUND, e.getMessage()
         );
         problemDetail.setTitle("Resource not found");
+        problemDetail.setType(URI.create("about:blank"));
         problemDetail.setDetail(e.getMessage());
         return problemDetail;
     }
