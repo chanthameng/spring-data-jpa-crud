@@ -2,7 +2,6 @@ package com.kshrd.springdatajpacrud.service.role;
 
 import com.kshrd.springdatajpacrud.entity.Role;
 import com.kshrd.springdatajpacrud.repository.RoleRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,4 +18,12 @@ public class RoleServiceImp implements RoleService {
 
         return roleRepository.save(roleEntity);
     }
+
+    @Override
+    public Role deleteRole(Integer role) {
+         roleRepository.deleteById(role);
+        return null;
+    }
+
+
 }

@@ -1,13 +1,11 @@
 package com.kshrd.springdatajpacrud.controller;
 
 import com.kshrd.springdatajpacrud.dto.response.ApiResponse;
+import com.kshrd.springdatajpacrud.entity.User;
 import com.kshrd.springdatajpacrud.service.role.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -31,4 +29,18 @@ private final RoleService roleService;
                         .build()
         );
     }
+    @DeleteMapping
+    public ResponseEntity<?> deleteUser(@RequestBody Integer id) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+                ApiResponse.builder()
+                        .message("Successfully deleted user")
+                        .payload(roleService.deleteRole(id))
+                        .status(HttpStatus.NO_CONTENT)
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
+    }
+
+
+
 }
