@@ -15,7 +15,7 @@ public class ResourceType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer typeId;
 
-    @Column(name = "type_name")
+    @Column(name = "type_name",nullable = false)
     private String typeName;
 
     @OneToMany(mappedBy = "resourceId")

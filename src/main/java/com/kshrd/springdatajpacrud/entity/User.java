@@ -22,29 +22,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column(name = "full_name")
+    @Column(name = "full_name",nullable = false)
     @NotBlank(message = "Please provide an username")
     private String fullName;
 
-    @Column(name = "email")
+    @Column(name = "email",nullable = false)
     @Email(message = "Please provide valid email")
     @NotBlank(message = "Please provide an email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     @NotBlank(message = "Please provide a password")
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id",nullable = false)
     @NotNull(message = "Role cannot be null")
     private Role role;
 
-    @Column(name = "created_on")
+    @Column(name = "created_on",nullable = false)
     @NotNull(message = "Timestamp cannot be null")
     private Timestamp createdOn;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Resource> resources;
 
 

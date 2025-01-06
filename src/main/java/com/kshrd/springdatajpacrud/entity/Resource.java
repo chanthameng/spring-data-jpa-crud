@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -15,20 +16,21 @@ public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer resourceId;
+
     private String resourceName;
 
     @Column(unique=true)
     private String labelNo;
 
-    @Column(name = "description")
+    @Column(name = "description",nullable=false)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type_id",nullable=false)
     private ResourceType resourceType;
 
     @ManyToOne
-    @JoinColumn(name = "created_by")
+    @JoinColumn(name = "created_by",nullable=false)
     @JsonIgnore
     private User user;
 
@@ -36,12 +38,11 @@ public class Resource {
     @JsonIgnore
     private Set<BookingDetail> bookings;
 
-    @Column(name = "imported_on")
+    @Column(name = "imported_on",nullable=false)
     private Timestamp importedOn;
 
-    private Boolean isAvailable;
-
-
+    @Column(name = "is_available")
+    private Boolean isAvailable=true;
 
 
 }

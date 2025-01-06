@@ -8,6 +8,10 @@ import com.kshrd.springdatajpacrud.repository.RoleRepository;
 import com.kshrd.springdatajpacrud.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class UserServiceImp implements UserService {
     private UserRepository userRepository;
@@ -38,9 +42,13 @@ public class UserServiceImp implements UserService {
         user.setEmail(userRequest.getEmail());
         user.setPassword(userRequest.getPassword());
         user.setRole(role);
-
-
+        user.setCreatedOn(Timestamp.valueOf(LocalDateTime.now()));
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

@@ -1,10 +1,9 @@
 package com.kshrd.springdatajpacrud.repository;
 
-import com.kshrd.springdatajpacrud.entity.User;
+import com.kshrd.springdatajpacrud.entity.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 }

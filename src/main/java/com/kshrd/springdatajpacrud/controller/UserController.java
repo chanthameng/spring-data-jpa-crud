@@ -28,10 +28,25 @@ public class UserController {
                 ApiResponse.<User>builder()
                         .message("Successfully added user")
                         .payload(userService.saveUser(userRequest))
+                        .status(HttpStatus.CREATED)
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllUsers() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                ApiResponse.builder()
+                        .message("Successfully retrieved users")
+                        .payload(userService.getAllUsers())
                         .status(HttpStatus.OK)
                         .timestamp(LocalDateTime.now())
                         .build()
         );
     }
+
+
+
 
 }

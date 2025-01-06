@@ -1,13 +1,13 @@
 package com.kshrd.springdatajpacrud.controller;
 
+import com.kshrd.springdatajpacrud.dto.request.BookingDTO;
 import com.kshrd.springdatajpacrud.dto.response.ApiResponse;
 import com.kshrd.springdatajpacrud.entity.Booking;
 import com.kshrd.springdatajpacrud.service.booking.BookingService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,6 +28,18 @@ public class BookingController {
                         .payload(bookingService.getAllBookings())
                         .message("Successfully get bookings")
                         .status(HttpStatus.OK)
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addBooking(@RequestBody @Valid BookingDTO bookingDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                ApiResponse.builder()
+                        .message("Successfully add booking")
+                        .payload(bookingService.addBooking(bookingDTO))
+                        .status(HttpStatus.CREATED)
                         .timestamp(LocalDateTime.now())
                         .build()
         );

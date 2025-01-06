@@ -1,13 +1,16 @@
 package com.kshrd.springdatajpacrud.controller;
 
+import com.kshrd.springdatajpacrud.dto.request.RoleRequest;
 import com.kshrd.springdatajpacrud.dto.response.ApiResponse;
 import com.kshrd.springdatajpacrud.entity.User;
 import com.kshrd.springdatajpacrud.service.role.RoleService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/roles")
@@ -19,7 +22,7 @@ private final RoleService roleService;
     }
 
     @PostMapping
-    public ResponseEntity<?> addRole(@RequestBody String role) {
+    public ResponseEntity<?> addRole(@RequestBody @Valid RoleRequest role) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 ApiResponse.builder()
                         .message("Successfully added role")
@@ -29,13 +32,13 @@ private final RoleService roleService;
                         .build()
         );
     }
-    @DeleteMapping
-    public ResponseEntity<?> deleteUser(@RequestBody Integer id) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteRole(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponse.builder()
                         .message("Successfully deleted user")
                         .payload(roleService.deleteRole(id))
-                        .status(HttpStatus.NO_CONTENT)
+                        .status(HttpStatus.OK)
                         .timestamp(LocalDateTime.now())
                         .build()
         );

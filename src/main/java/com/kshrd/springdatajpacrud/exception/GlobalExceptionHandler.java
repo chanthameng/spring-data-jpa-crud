@@ -1,6 +1,7 @@
 package com.kshrd.springdatajpacrud.exception;
 
 import com.kshrd.springdatajpacrud.exception.specificException.NotFoundException;
+import com.kshrd.springdatajpacrud.exception.specificException.ResourceNotAvailableException;
 import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,17 @@ public class GlobalExceptionHandler {
                 HttpStatus.NOT_FOUND, e.getMessage()
         );
         problemDetail.setTitle("Resource not found");
+        problemDetail.setType(URI.create("about:blank"));
+        problemDetail.setDetail(e.getMessage());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(ResourceNotAvailableException.class)
+    ProblemDetail handleResourceNotAvailableException(ResourceNotAvailableException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT, e.getMessage()
+        );
+        problemDetail.setTitle("Already Booked");
         problemDetail.setType(URI.create("about:blank"));
         problemDetail.setDetail(e.getMessage());
         return problemDetail;

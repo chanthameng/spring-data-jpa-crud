@@ -29,7 +29,7 @@ public class Booking {
     @Column(name = "description")
     private String decription;
 
-    @Column(name = "departure_time")
+    @Column(name = "departure_time", nullable = false)
     private Timestamp departureTime;
 
 }
