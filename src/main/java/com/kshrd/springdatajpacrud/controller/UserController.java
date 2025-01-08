@@ -35,18 +35,19 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllUsers() {
+    public ResponseEntity<?> getAllUsers(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
         return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponse.builder()
                         .message("Successfully retrieved users")
-                        .payload(userService.getAllUsers())
+                        .payload(userService.getAllUsers(page,size))
                         .status(HttpStatus.OK)
                         .timestamp(LocalDateTime.now())
                         .build()
         );
     }
-
-
 
 
 }

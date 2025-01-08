@@ -6,6 +6,10 @@ import com.kshrd.springdatajpacrud.entity.User;
 import com.kshrd.springdatajpacrud.exception.specificException.NotFoundException;
 import com.kshrd.springdatajpacrud.repository.RoleRepository;
 import com.kshrd.springdatajpacrud.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -48,7 +52,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<User> getAllUsers(int page, int size) {
+        //pagination
+        Pageable pageable = PageRequest.of(page, size);
+        //pagination with sort
+        Pageable sortedByName = PageRequest.of(page,size, Sort.by(Sort.Order.desc("userId")));
+        Page<User> users = userRepository.findAll(sortedByName);
+
+        return users.getContent();
     }
 }
