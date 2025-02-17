@@ -1,11 +1,21 @@
-    spring:
-      datasource:
-        url: jdbc:postgresql://localhost:5432/booking_system_db
-        username: postgres
-        password: 1999
-        driver-class-name: org.postgresql.Driver
-      jpa:
-        hibernate:
-          ddl-auto: update
-        database: postgresql
-        show-sql: true
+
+spring:
+  application:
+    name: jpa-tesing-api
+
+  datasource:
+    username: chantha
+    password: 123
+    url: jdbc:postgresql://110.74.194.123:5432/chanthaDB
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: postgresql
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 9090
